@@ -1,0 +1,58 @@
+<div class="mx-auto">
+  <div class="form-group">
+    <select class="form-control" name="state" id="state" ngModel [(ngModel)]="state" (change)="onChangeState()">
+        <option value="">Select state</option>
+      <option *ngFor="let s of states" [value]="s">{{s}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+      <select class="form-control" name="district" id="district" ngModel [(ngModel)]="district" (change)="onChangeDist()">
+          <option value="">Select district</option>
+        <option *ngFor="let d of districts" [value]="d">{{d}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control" name="taluk" id="taluk" ngModel [(ngModel)]="taluk" (change)="onChangeTaluk()">
+          <option value="">Select taluk</option>
+        <option *ngFor="let t of taluks" [value]="t">{{t}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+        <input class="form-control" placeholder="Search Post office and Pin code" type="text" name="searchStr" id="searchStr" ngModel [(ngModel)]="searchParam">        
+      </div>  
+</div>
+<div>
+  <div *ngIf="totalPg > 0" class="border border-light rounded pt-3 bg-light">
+    <div class="row">
+      <div class="col-sm-12">
+          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalPg" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>        
+      </div>      
+    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Post Offices</li>
+    <li class="list-group-item" *ngFor="let p of postRcs | postalPipe:[state,district,taluk]:searchParam:isSearch | pagination:page" style="text-align:left">
+      <div class="float-left">
+          Pin Code - {{p.pincode}} <br>
+          Office - {{p.officename}} <br>                       
+          Taluk - {{p.taluk}} <br>
+          District - {{p.districtname}} <br>
+          State - {{p.statename}} <br>    
+      </div>
+      <div class="float-right">
+        Office type - {{p.officetype}} <br>
+        Division - {{p.divisionname}} <br>                       
+        Circle - {{p.circlename}} <br>
+        Region - {{p.regionname}} <br>          
+    </div>          
+    </li>
+  </ul> 
+  <div *ngIf="totalPg > 0" class="border border-light rounded pt-3 bg-light">
+    <div class="row">
+      <div class="col-sm-12">
+          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalPg" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>        
+      </div>      
+    </div>
+  </div>
+</div>
+

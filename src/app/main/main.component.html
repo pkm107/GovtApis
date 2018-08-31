@@ -1,0 +1,29 @@
+    <div class="container d-flex h-100 align-items-center">
+      <div class="mx-auto text-center">
+          <div style="text-align:center">
+              <h1>
+                {{ tittle }}
+              </h1> </div>
+              <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            
+                <!-- Links -->
+                <ul class="navbar-nav">
+                  <li class="nav-item" routerLinkActive="active">
+                    <a style="cursor: pointer" class="nav-link" routerLink="/main/railway">Railway</a>
+                  </li>
+                  <li class="nav-item" routerLinkActive="active">
+                    <a style="cursor: pointer" class="nav-link" routerLink="/main/air_polution">Air Quality</a>
+                  </li>
+                  <li class="nav-item disabled" routerLinkActive="active">
+                    <a style="cursor: pointer" class="nav-link" routerLink="/main/pin_search">Indian Post</a>
+                  </li>
+                  <li class="nav-item disabled" routerLinkActive="active">
+                    <a style="cursor: pointer" class="nav-link" routerLink="/main/comodity_price">Comodity</a>
+                  </li>
+                </ul>  
+              </nav><br>
+        <router-outlet></router-outlet> 
+                
+     
+    </div>
+    </div>  

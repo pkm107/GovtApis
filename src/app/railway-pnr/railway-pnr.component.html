@@ -1,0 +1,38 @@
+<form ngForm #f="ngForm" (ngSubmit)="searchPnr(f)">
+    <div class="form-group">
+        <label for="pnrnumber" class="control-label">PNR Number:</label>
+        <input class="form-control" type="text" name="pnrnumber" id="pnrnumber" 
+        ngModel [(ngModel)]="pnrnumber" required minlength="10" maxlength="10">
+        <div class="text-danger" *ngIf="f.touched && !f.valid">Pleae enter a valid PNR</div>
+      </div>
+      <button [class.disabled]="!f.valid" type="submit" class="btn btn-primary">Search PNR</button> &nbsp;
+      <a style="cursor:pointer" class="btn btn-success" routerLink="/main/railway">Goto Timetable</a> 
+</form>
+<div *ngIf="isShowRes" class="float-left rounded text-white" [class.bg-success]="!isErrror"
+[class.bg-danger]="isErrror">
+  PNR : {{pnrStatus.pnr}} <br>
+  <p *ngIf="!isErrror">Updated On : {{pnrStatus.lastUpdated}} </p>
+  <p *ngIf="!isErrror">Charting Status : {{pnrStatus.chartingStatus}}</p>
+  <p *ngIf="isErrror">Error: {{pnrStatus.error}}</p>
+  <div *ngIf="!isErrror">
+      Journey Details : <br>
+      Train No. : {{pnrStatus.journeyDetails.trainNumber}} <br>
+      Train Name : {{pnrStatus.journeyDetails.trainName}} <br>
+      Boarding Date : {{pnrStatus.journeyDetails.boardingDate}} <br>
+      Class : {{pnrStatus.journeyDetails.class}} <br>
+      From : {{pnrStatus.journeyDetails.from}} <br>
+      To : {{pnrStatus.journeyDetails.to}} <br>
+      Reserved Upto : {{pnrStatus.journeyDetails.reservedUpto}} <br>
+      Boarding station : {{pnrStatus.journeyDetails.boardingPoint}} <br>
+  </div>
+  <div *ngIf="!isErrror">
+    <ul>
+      <li *ngFor="let p of pnrStatus.bookingStatus">
+        Passsenger No. : {{p.passengerNo}} <br>
+        Booking Status. : {{p.bookingStatus}} <br>
+        Current Status. : {{p.currentStatus}} <br>
+      </li>
+    </ul>
+  </div>
+
+</div>

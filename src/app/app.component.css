@@ -1,0 +1,34 @@
+.loader {
+    position: relative;
+    border: 16px solid #eeebf1; /* Light grey */
+    border-top: 16px solid #b4bdc4; /* Blue */
+    border-radius: 50%;
+    width: 270px;
+    height: 270px;
+    animation: spin 2s linear infinite;
+}
+
+.loader-image{
+    color:white;
+    position: absolute;
+    top:42%;   
+    left:41%;    
+}
+
+.masthead {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background: linear-gradient(to bottom, rgba(22, 22, 22, 0.1) 0%, rgba(22, 22, 22, 0.5) 75%, #161616 100%), url("../assets/bg-masthead.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

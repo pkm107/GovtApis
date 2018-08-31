@@ -1,0 +1,19 @@
+
+.Good,.Good>td{
+    background-color:#79bc6a;
+}
+.Satisfactory,.Satisfactory>td{
+    background-color:#bbcf4c;
+}
+.Moderately_polluted,.Moderately_polluted>td{
+    background-color:#FFCF00;
+}
+.Poor,.Poor>td{
+    background-color:#FF9A00;
+}
+.Very_poor,.Very_poor>td{
+    background-color:red;
+}
+.Severe,.Severe>td{
+    background-color:brown;
+}

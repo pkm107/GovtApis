@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="rounded">    
+  </div>
+    <form class="form-inline" #f="ngForm">  
+        <input class="form-control mb-2 mr-sm-2" placeholder="Source" type="text" name="srcstn" id="srcstn" ngModel [(ngModel)]="srcstn">    
+        <input class="form-control mb-2 mr-sm-2" placeholder="Destination" type="text" name="deststn" id="deststn" ngModel [(ngModel)]="deststn">    
+        <button type="button" class="btn btn-primary  mb-2" (click)="swapTrain()">Swap</button>
+        &nbsp;&nbsp;<span><b>OR</b></span>&nbsp;&nbsp;<a style="cursor:pointer" routerLink="/main/pnr_check" class="btn btn-success  mb-2">Check PNR</a>
+    </form>    
+    <div>
+      <div class="border border-light rounded pt-3 bg-light">
+        <div class="row">
+          <div class="col-sm-9">
+              <ngb-pagination class="d-flex justify-content-center" [collectionSize]="recCount" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>        
+          </div>
+          <div class="col-sm-3">
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-filter" aria-hidden="true"></i></span>
+                  </div>
+                  <input class="form-control" type="text" name="searchStr" placeholder="Filter" id="searchStr" ngModel [(ngModel)]="searchStr">
+                </div>            
+          </div>
+        </div>
+      </div>
+        <br>
+      <table class="table table-striped table-sm">
+        <thead class="thead-dark">
+          <th>Train No.</th>
+          <th>Train name</th>
+          <th>Source</th>
+          <th>Destination</th> 
+          <th>Stops</th>    
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of trains | filterBySrcDstn:srcstn:deststn:page:searchStr">
+            <td>{{t.train_no | replace}}</td>
+            <td>{{t.train_name}}</td>
+            <td>{{t.src_name}} ({{t.src_code}})</td>
+            <td>{{t.dest_name}} ({{t.dest_code}})</td>
+            <td>
+              <a style="cursor:pointer" class="btn btn-sm btn-info" (click)="open(content,t)"><i class="fa fa-search text-white" aria-hidden="true"></i></a>                                 
+            </td>            
+          </tr>
+        </tbody>
+      </table>
+      <div class="border border-light rounded pt-3 bg-light">
+          <ngb-pagination class="d-flex justify-content-center" [collectionSize]="recCount" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      </div>  <br>   
+      <b>Disclaimer : </b>Data shown here from a data source provided by <a href="https://api.data.gov.in/resource/b46200c1-ca9a-4bbe-92f8-b5039cc25a12?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&offset=0&limit=100" target="_blank"><code>Minstry of Railways</code></a> .  
+      The owner of this website is not responsible for any mismatch.<br>
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Time Table</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="bg-info rounded text-white p-2">
+                <b>{{train.train_no | replace}} - {{train.train_name}}</b><br>
+                Source : {{train.src_name}} ({{train.src_code}}) <br>                
+                Destination : {{train.dest_name}} ({{train.dest_code}})
+              </div>            
+          <div>
+              <table class="table table-striped">
+                  <thead>
+                      <th>#</th>
+                      <th>Stops</th>
+                      <th>Arrival</th>
+                      <th>Departure</th>
+                      <th>Distance</th>
+                  </thead>  
+                  <tbody>
+                      <tr *ngFor="let s of train.stops">
+                        <td>{{s.islno}}</td>
+                        <td>{{s.station_name}} ({{s.station_code}})</td>
+                        <td>{{s.arrival_time | replace}}</td>
+                        <td>{{s.departure_time | replace}}</td>
+                        <td>{{s.distance | replace}} Km.</td>
+                      </tr>
+                    </tbody>            
+                </table> 
+          </div>            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Close</button>
+        </div>
+      </ng-template>
+    
+</div>

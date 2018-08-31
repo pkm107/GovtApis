@@ -1,0 +1,44 @@
+<form class="form-inline">
+  <select class="form-control mb-2 mr-sm-2" name="state" id="state"
+   ngModel [(ngModel)]="state" (change)="onChangeState()">
+    <option value="">Select state</option>
+    <option *ngFor="let s of states" (value)="s">{{s}}</option>
+  </select>
+  <select *ngIf="districts.length > 0" class="form-control mb-2 mr-sm-2" name="district" id="district" 
+  ngModel [(ngModel)]="district" (change)="onChangeDistrict()">
+    <option value="">Select district</option>
+    <option *ngFor="let d of districts" (value)="d">{{d}}</option>
+  </select>
+  <select *ngIf="markets.length > 0" class="form-control mb-2 mr-sm-2" name="market" id="market" 
+  ngModel [(ngModel)]="market" (change)="onChangeMarket()">
+    <option value="">Select market</option>
+    <option *ngFor="let m of markets" (value)="m">{{m}}</option>
+  </select>
+  <select *ngIf="comodities.length > 0" class="form-control mb-2 mr-sm-2" name="comodity" id="comodity" 
+    ngModel [(ngModel)]="comodity" (change)="onChangecomodity()">
+      <option value="">Select comodity</option>
+      <option *ngFor="let c of comodities" (value)="c">{{c}}</option>
+    </select>
+</form>
+<table *ngIf="records.length > 0" class="table table-striped">
+  <thead>
+    <th>State</th>
+    <th>District</th>
+    <th>Market</th>
+    <th>Comodity</th>
+    <th>Min Price</th>
+    <th>Modal Price</th>
+    <th>Max Price</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of records">
+      <td>{{r.state}}</td>
+      <td>{{r.district}}</td>
+      <td>{{r.market}}</td>
+      <td>{{r.commodity}}</td>
+      <td>{{r.min_price | currency:'INR'}}/Quintal</td>
+      <td>{{r.modal_price | currency:'INR'}}/Quintal</td>
+      <td>{{r.max_price | currency:'INR'}}/Quintal</td>
+    </tr>
+  </tbody>
+</table>
