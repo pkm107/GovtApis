@@ -20,6 +20,8 @@
       <option *ngFor="let c of comodities" (value)="c">{{c}}</option>
     </select>
 </form>
+<ngb-pagination *ngIf="records.length > 0" class="d-flex justify-content-center" [collectionSize]="records.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+  [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
 <table *ngIf="records.length > 0" class="table table-striped">
   <thead>
     <th>State</th>
@@ -31,7 +33,7 @@
     <th>Max Price</th>
   </thead>
   <tbody>
-    <tr *ngFor="let r of records">
+    <tr *ngFor="let r of records| pagination:page">
       <td>{{r.state}}</td>
       <td>{{r.district}}</td>
       <td>{{r.market}}</td>
@@ -42,3 +44,5 @@
     </tr>
   </tbody>
 </table>
+<ngb-pagination *ngIf="records.length > 0" class="d-flex justify-content-center" [collectionSize]="records.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+  [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>

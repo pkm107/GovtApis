@@ -8,10 +8,11 @@ import { ComodityService } from './comodity-service';
 })
 export class ComodityPriceComponent implements OnInit {
 
-  constructor(private cmdSvc:ComodityService) { }
-  states:string[]=[];
-  state:string='';
-  districts:string[]=[];
+  constructor(private cmdSvc: ComodityService) { }
+  page: number = 1;
+  states: string[] = [];
+  state: string = '';
+  districts: string[] = [];
   district:string='';
   markets:string[]=[];
   market:string='';
